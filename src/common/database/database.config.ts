@@ -31,3 +31,19 @@ export const driverDatabaseConfig: TypeOrmModuleOptions = {
   retryDelay: 3000, 
   name: 'driverConnection',
 };
+
+export const generalDatabaseConfig: TypeOrmModuleOptions = {
+  type: 'mysql',
+  host: process.env.DB_HOST,
+  port: +process.env.DB_PORT,
+  username: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+  synchronize: true, // Set to false for production
+  manualInitialization: true,
+  logging: true,
+  connectTimeout: 10000,  // Timeout for initial connection in ms
+  retryAttempts: 3,  // Retry the connection 3 times before failing
+  retryDelay: 3000,
+  name: 'generalConnection',
+};

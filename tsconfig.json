@@ -17,5 +17,10 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false
-  }
+  },
+  "include": ["src/**/*", "env.d.ts"],
+  "exclude": [
+    "node_modules",
+    "*.env"
+  ]
 }

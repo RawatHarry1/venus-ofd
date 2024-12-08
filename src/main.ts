@@ -5,6 +5,8 @@ import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { ConfigServiceExtended } from './config/config.service';
 import { Logger } from '@nestjs/common';
 import { DataSource } from 'typeorm';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

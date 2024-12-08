@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import {
   customerDatabaseConfig,
   driverDatabaseConfig,
+  generalDatabaseConfig
 } from './common/database/database.config';
 import { CustomerModule } from './customer/customer.module';
 import { DriverModule } from './driver/driver.module';
@@ -17,17 +18,18 @@ const envData = process.env;
     ConfigModule.forRoot({
       load: [() => ({})], // Placeholder to use the extended ConfigService
       isGlobal: true, // Makes config available globally,
-      //envFilePath: '.env',
+      envFilePath: '.env',
     }),
     TypeOrmModule.forRoot({
-      type: 'mssql', 
+      type: 'mysql',
       name: 'venus_auth',
-      host: envData.db_host,
-      port: +envData.db_port,
-      username: envData.db_username,
-      password: envData.db_password,
-      database: envData.db_name,
-  }),
+      host: envData.DB_HOST,
+      port: +envData.DB_PORT,
+      username: envData.DB_USER,
+      password: envData.DB_PASS,
+      database: envData.DB_NAME,
+      logging: true
+    }),
   /* TypeOrmModule.forRoot({ 
       name: "venus_live", // Unique name
       type: 'mssql', 
@@ -36,10 +38,11 @@ const envData = process.env;
       username: envData.CUSTOMER_DB_USER,
       password: envData.CUSTOMER_DB_PASS,
       database: envData.CUSTOMER_DB_NAME,
-  }), */
+  }),
    /*  TypeOrmModule.forRoot(customerDatabaseConfig), // Customer DB
     TypeOrmModule.forRoot(driverDatabaseConfig), // Driver DB */
     /* RedisModule.forRoot(redisConfig), */ // Redis
+    TypeOrmModule.forRoot(generalDatabaseConfig), // Driver DB */
     CustomerModule,
     DriverModule,
     AuthModule,
